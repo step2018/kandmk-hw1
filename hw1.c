@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #define M 16
-#define N 256
 
 void mojisort(char *h){
   int i, j;
@@ -18,31 +17,24 @@ void mojisort(char *h){
   }
 }
 	
-
-/*void compare(char *s,char *t){
-  if(memcmp(s, t, 16)==0){
-    return s;
-  }
-}
-*/
 int main(void){
   char t[17];
   FILE *fp;
   char *fname = "dictionary.txt";
-  char *fname_cpy = "dictinary.txt";
-  char s[N];
+  char s[16], p[16];
   scanf("%s", t);
-  int len = strlen(t);
-  t[len] = \n;
-  mojisort ( fp = fopen(fname, "r");
+  mojisort(t);
+  fp = fopen(fname, "r");
   if(fp == NULL){
     printf("%s error\n", fname);
     return -1;
   }
-  while(fgets(s, N, fp) != NULL){
+  while(fgets(s, 17, fp) != NULL){
+    strtok(s, "\n\0");
+    strcpy(p, s);
     mojisort(s);
-    if(!strcmp(s, t)){
-      printf("%s ", s);
+    if(!strcmp(t, s)){
+      printf("%s", p);
     }
   }
   fclose(fp);
