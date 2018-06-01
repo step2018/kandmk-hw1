@@ -22,6 +22,7 @@ int main(void){
   FILE *fp;
   char *fname = "dictionary.txt";
   char s[16], p[16];
+  int sum = 0;
   scanf("%s", t);
   mojisort(t);
   fp = fopen(fname, "r");
@@ -29,13 +30,15 @@ int main(void){
     printf("%s error\n", fname);
     return -1;
   }
-  while(fgets(s, 17, fp) != NULL){
-    strtok(s, "\n\0");
+  while(fgets(s, 16, fp) != NULL){
     strcpy(p, s);
-    mojisort(s);
-    if(!strcmp(t, s)){
-      printf("%s", p);
+    if(strlen(s)<16 || s[15] == '\n'){
+      s[strlen(s)-1] = '\0';
     }
+    mojisort(s);
+    if(strncmp(s, t, strlen(t))==0){
+	printf("%s", p);
+      }
   }
   fclose(fp);
   return 0;
