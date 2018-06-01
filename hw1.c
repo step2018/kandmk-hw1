@@ -30,10 +30,12 @@ int main(void){
     return -1;
   }
   while(fgets(s, 17, fp) != NULL){
-    strtok(s, "\n\0");
     strcpy(p, s);
+    if(strlen(s)<16 || s[15] == '\n'){
+      s[strlen(s)-1] = '\0';
+    }
     mojisort(s);
-    if(!strcmp(t, s)){
+    if(strncmp(t, s, strlen(t))==0){
       printf("%s", p);
     }
   }
