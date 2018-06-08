@@ -21,7 +21,7 @@ int main(void){
   char t[17];
   FILE *fp;
   char *fname = "dictionary.txt";
-  char s[16], p[16];
+  char s[17], p[17];
   int sum = 0;
   scanf("%s", t);
   mojisort(t);
@@ -30,20 +30,15 @@ int main(void){
     printf("%s error\n", fname);
     return -1;
   }
-  while(fgets(s, 17, fp) != NULL){
+  while(fgets(s, 16, fp) != NULL){ // fgetsは指定した16個まで文字を入力するけど、その後'\0'を加えるので、17個分のcharのメモリーが必要です。
     strcpy(p, s);
     if(strlen(s)<16 || s[15] == '\n'){
       s[strlen(s)-1] = '\0';
     }
     mojisort(s);
-    if(strncmp(t, s, strlen(t))==0){
+    if(strncmp(t, s, strlen(t))==0){  // ここは多分思った通りにうごいていないです（例えば「lampe」を入れると「maple」も「samples」も出ています。
       printf("%s", p);
-
     }
-    mojisort(s);
-    if(strncmp(s, t, strlen(t))==0){
-	printf("%s", p);
-      }
   }
   fclose(fp);
   return 0;
